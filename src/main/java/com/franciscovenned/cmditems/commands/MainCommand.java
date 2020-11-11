@@ -14,6 +14,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -237,7 +239,7 @@ public class MainCommand implements CommandExecutor {
                 List<String> lorecolores = new ArrayList<>(); //Crear una nueva lista
                 for (String linea : lore){
                     lorecolores.add(ChatColor.translateAlternateColorCodes('&', linea)); //De la lista de la config "Lore" las pasa a otra nueva linea creada por ArrayList
-            }
+                }
                 meta.setLore(lorecolores); //Establecer la nueva lista creada por Arraylist
                 item.setItemMeta(meta);
                 player4.getInventory().addItem(item);
@@ -269,6 +271,39 @@ public class MainCommand implements CommandExecutor {
                 player5.getInventory().addItem(item2);
                 send(sender,"Obtuviste el item con exito");
                 break;
+            case "espadamodificada":
+                if (!sender.hasPermission("cmditem.give")) {
+                    send(sender, "No tienes permisos");
+                    return true;
+                }
+                // Material, Cantidad, Nombre, Lineas de Lore.
+                if (args.length < 5) {
+                    send(sender, "El uso correcto es EspadaModificada, Material Cantidad, Nombre");
+                    return true;
+                }
+                String espadamodificada = args[1];
+                int cantidad5 = Integer.parseInt(args[2]);  // Cantidad
+                String nombreespada = args[3];
+                List<String> lore5 = new ArrayList<>();  // CREA UNA LISTA DE STRING
+                for (int i = 4; i < args.length; i ++ ){  //
+                                                // i++ es lo mismo que i += 1 y es lo mismo que i = i + 1
+                    // int i = 4 (Apartir de la linea 4 se creara la lore cada espacio es una nueva linea con la operacion)
+                    lore5.add(args[i]); // Agrega todas las lores apartir del argumento "i"
+                }
+
+                config.set(nombreespada + ".tipo",espadamodificada);
+                config.set(nombreespada + ".cantidad",cantidad5);
+                config.set(nombreespada + ".name",nombreespada);
+                config.set(nombreespada + ".lore",lore5);
+
+                try {
+                    config.save(new File(plugin.getDataFolder(),"config.yml")); //Guardo el item en el yml
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                send(sender,"Espada Guardada");
+                break;
+
             default:
                 send(sender,"comando desconocido");
 
