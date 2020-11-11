@@ -1,0 +1,27 @@
+name: CMDItems
+version: ${project.version}
+main: com.franciscovenned.cmditems.CMDItems
+api-version: 1.16
+authors: [ FranciscoVenned ]
+description: CMD
+commands:
+  main:
+    description: Abre la ayuda del plugin
+    usage: Error al intentar usar el comando
+    default: false
+    aliases: [m, ma]
+permissions:
+  main.use:
+    description: Usas el comando main
+    default: op
+  main.get:
+    description: Obtienes un item
+    default: op
+  main.*:
+    description: Permite usar todos los comandos
+    default: op
+    children:
+      main.use: true
+
+
+
