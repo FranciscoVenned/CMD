@@ -1,8 +1,10 @@
 package com.franciscovenned.cmditems;
 
 import com.franciscovenned.cmditems.commands.MainCommand;
+import com.franciscovenned.cmditems.events.FirtsEvents;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +25,7 @@ public final class CMDItems extends JavaPlugin {
         send("&2Plugin &aActivate");
         registerConfig();
         registerCommands();
+        registerEvents();
 
 
     }
@@ -46,6 +49,11 @@ public final class CMDItems extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void registerEvents(){
+        PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(new FirtsEvents(),this);
     }
 
     //Registro de comandos
