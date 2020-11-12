@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
+import java.io.IOException;
 
 public final class CMDItems extends JavaPlugin {
 
@@ -36,6 +37,14 @@ public final class CMDItems extends JavaPlugin {
     File config = new File(getDataFolder(),"config.yml");
         if(!config.exists()) {
         saveDefaultConfig();
+        }
+    }
+
+    public void saveConfig(){
+        try {
+            getConfig().save(new File(getDataFolder(), "config.yml")); //Guardo el item en el yml
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
