@@ -1,7 +1,8 @@
 package com.franciscovenned.cmditems;
 
 import com.franciscovenned.cmditems.commands.MainCommand;
-import com.franciscovenned.cmditems.events.FirtsEvents;
+import com.franciscovenned.cmditems.events.EventosDeClase;
+import com.franciscovenned.cmditems.events.MisEventos;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -53,7 +54,8 @@ public final class CMDItems extends JavaPlugin {
 
     private void registerEvents(){
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new FirtsEvents(),this);
+        pm.registerEvents(new MisEventos(this),this);
+        pm.registerEvents(new EventosDeClase(this), this);
     }
 
     //Registro de comandos
