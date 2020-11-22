@@ -2,7 +2,7 @@ package com.franciscovenned.cmditems;
 
 import com.franciscovenned.cmditems.commands.MainCommand;
 import com.franciscovenned.cmditems.events.EventosDeClase;
-import com.franciscovenned.cmditems.events.MisEventos;
+import com.franciscovenned.cmditems.events.Interact;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -15,6 +15,7 @@ public final class CMDItems extends JavaPlugin {
     private final PluginDescriptionFile pdfFile = getDescription();
     private final String version = pdfFile.getVersion();
     private final String nombre = pdfFile.getName();
+    private static CMDItems instance;
 
     private void send(String message) {
         getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', message));
@@ -22,6 +23,7 @@ public final class CMDItems extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this; // Guardando la clase principal y compartirlas siendo static
         // Inicio del plugin
         send("&2Plugin &aActivate");
         registerConfig();
@@ -54,8 +56,9 @@ public final class CMDItems extends JavaPlugin {
 
     private void registerEvents(){
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new MisEventos(this),this);
-        pm.registerEvents(new EventosDeClase(this), this);
+//        pm.registerEvents(new MisEventos(this),this);
+//          pm.registerEvents(new EventosDeClase(this), this);
+//          pm.registerEvents(new Interact(this), this);
     }
 
     //Registro de comandos
@@ -67,6 +70,10 @@ public final class CMDItems extends JavaPlugin {
     // Verificar la version del plugin
     public String getVersion(){
         return this.version;
+    }
+
+    public static CMDItems getInstance(){
+        return instance;
     }
 
 }

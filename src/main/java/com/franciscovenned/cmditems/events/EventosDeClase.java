@@ -82,9 +82,10 @@ public class EventosDeClase implements Listener {
         send(player, "En la ubicacion " + blockX + " " +  blockY + " " +  blockZ);
 //        config.set("Informacion", block.getType().toString());
         config.set("Tipo de Bloque", block.getType().toString());
-        config.set("Ubicacion del Bloque.X", blockX);
-        config.set("Ubicacion del Bloque.Y", blockY);
-        config.set("Ubicacion del Bloque.Z", blockZ);
+        config.set("Location", blockLocation);
+//        config.set("Ubicacion del Bloque.X", blockX);
+//        config.set("Ubicacion del Bloque.Y", blockY);
+//        config.set("Ubicacion del Bloque.Z", blockZ);
 //        config.set("y", player.getLocation().getBlockY());
 //        config.set("x", player.getLocation().getBlockX());
 //        config.set("z", player.getLocation().getBlockZ());

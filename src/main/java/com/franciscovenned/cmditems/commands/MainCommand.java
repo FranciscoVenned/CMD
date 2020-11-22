@@ -3,6 +3,7 @@ package com.franciscovenned.cmditems.commands;
 import com.franciscovenned.cmditems.CMDItems;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -363,7 +364,7 @@ public class MainCommand implements CommandExecutor {
                     return true;
                 }
                 String nombreEspada = args[1];
-                if (!config.contains(nombreEspada)){
+                if (!config.contains(nombreEspada)){  // Verifica si contiene el nombre del Item en el argumento 1
                     send(sender,"Esa espada no existe");
                     return true;
                 }
@@ -385,6 +386,47 @@ public class MainCommand implements CommandExecutor {
                 send(sender, "Obtuviste el item con exito");
                 break;
 
+            case "setbloque":
+                if (args.length < 2) {
+                    send(sender,"Usa bien el comando");
+                    return true;
+                }
+                Location loc = (Location) config.get("Location"); //Transformacion el Obj en un Location (Se podria romper si no estas seguro)
+                loc.getBlock().setType(Material.valueOf(args[1]));
+                send(sender,"Cambiamos el tipo de Bloque");
+                break;
+
+
+            case "getItem":
+                if (!sender.hasPermission("cmditems.espada")) {
+                    send(sender, "No tienes permisos para givear item");
+                    return true;
+                }
+                if (sender instanceof ConsoleCommandSender) {
+                    send(sender, "No puedes ejecutar el siguiente comando en la consola");
+                    return true;
+                }
+                if (args.length < 2) {
+                    send(sender, "Usa bien el comando -.-");
+                    return true;
+                }
+                if (!config.contains("items." + args[1])){
+                    send(sender, "No existe ese item");
+                return true;
+                }
+                ItemStack item7 = new ItemStack(Material.valueOf(config.getString("items." + args[1] + ".item.type")), 1);
+                ItemMeta meta4 = item7.getItemMeta();
+                meta4.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString("items." + args[1] + ".item.name")));
+                List<String> lore4 = config.getStringList( "items." + args[1] + ".item.lore");
+                List<String> lorecolores4 = new ArrayList<>();
+                for (String linea : lore4) {
+                    lorecolores4.add(ChatColor.translateAlternateColorCodes('&', linea));
+                }
+                meta4.setLore(lorecolores4);
+                item7.setItemMeta(meta4);
+                send(sender, "Se te acaba de entregar el item " + args[1]);
+                ((Player) sender).getInventory().addItem(item7);
+                break;
 
             default:
                 send(sender, "comando desconocido");

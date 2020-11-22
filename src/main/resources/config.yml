@@ -1,20 +1,14 @@
 prefix: "&c[CMD]"
-prueba:
-  argumento: "&a[LOL]"
-shop:
-  - "ew"
-  - "wa"
-  - "wi,2,5"
-item:
-  tipo: "APPLE"
-  cantidad: 1
-  name: "La manza de la lora"
-  lore:
-    - "&fLa concha de la lora"
-    - "&fLa manzana sagrada de notch"
-espada:
-  tipo: "DIAMOND_SWORD"
-  cantidad: 1
-  name: "La Diamond Sword"
-  lore:
-    - "&fLa espada mas cheta"
+items:
+  Temporizador:
+    permission: "cmditems.Temporizador"
+    commands:
+      - "me congelao"
+      - "ya te cagaste pibe"
+      - "Mi ulti"
+    item:
+      type: NETHER_STAR
+      name: "Estrella Temporizador"
+      lore:
+        - "Te temporiza"
+        - "Te temporiza por 10 segundos y eres invulnerable"
